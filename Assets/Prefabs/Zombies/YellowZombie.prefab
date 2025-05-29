@@ -1517,6 +1517,8 @@ GameObject:
   - component: {fileID: 5404996789671690383}
   - component: {fileID: -6008040210265789706}
   - component: {fileID: -6084398920177663177}
+  - component: {fileID: 9019161339781150028}
+  - component: {fileID: -8420494526057289442}
   m_Layer: 16
   m_Name: YellowZombie
   m_TagString: Untagged
@@ -1575,9 +1577,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  _layer:
-    serializedVersion: 2
-    m_Bits: 65536
 --- !u!65 &-6084398920177663177
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1593,12 +1592,53 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.64, y: 1.7, z: 0.5}
   m_Center: {x: 0, y: 0.9, z: 0.15}
+--- !u!114 &9019161339781150028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845506606414295383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a95581ceb813247ac348a9bec5bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinPrefab: {fileID: 5814607813763882122, guid: 01e1752366bd8a54099885a72b28eff8,
+    type: 3}
+--- !u!54 &-8420494526057289442
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845506606414295383}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3899570908195899307
 GameObject:
   m_ObjectHideFlags: 0
