@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IMovable, IDamageable
 
     private void Start()
     {
-        _speed = Random.Range(0.5f, 1.5f);
+        _speed = Random.Range(0.3f, 0.9f);
         Move();
     }
 

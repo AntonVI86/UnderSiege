@@ -41,21 +41,6 @@ public class Bomb : Booster
         Use();
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            // Проверяем, пересекается ли луч с чем-либо на сцене  
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                print(hit.collider.name);
-            }
-
-        }
-    }
-
     public override void Use()
     {
         if (_isActivate)

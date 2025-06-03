@@ -21,6 +21,12 @@ public class HealBooster : Booster
 
     public override void Use()
     {
+        if (_outpostHealth.CurrentHealth == _outpostHealth.MaxHealth)
+        {
+            print("Нечего ремонтировать");
+            return;
+        }
+
         _outpostHealth.Heal();
         _slot.ClearSlot();
     }

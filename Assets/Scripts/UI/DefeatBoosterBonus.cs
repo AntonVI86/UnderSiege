@@ -23,6 +23,8 @@ public class DefeatBoosterBonus : MonoBehaviour
 
     private void Start()
     {
+        _button.enabled = false;
+
         ShuffleArray();
 
         for (int i = 0; i < _slots.Count; i++)
@@ -37,7 +39,8 @@ public class DefeatBoosterBonus : MonoBehaviour
         {
             slot.RemoveWing();
         }
-        
+
+        _button.enabled = true;
         _currentBooster = booster;
         _info.text = Lean.Localization.LeanLocalization.GetTranslationText(booster.Description);
     }

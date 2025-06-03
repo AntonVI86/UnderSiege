@@ -125,6 +125,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _layerForReceived: 14
-  _speed: 200
+  _speed: 150
   _minShellValue: 1
   _maxShellValue: 3

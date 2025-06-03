@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<Enemy> _enemyPrefabs;
     [SerializeField] private MonstersCountView _countView;
     [SerializeField] private int _enemyAmount = 50;
+    [SerializeField] private Wave _wave;
 
     public List<Enemy> EnemiesOnField = new List<Enemy>();
 
@@ -19,6 +20,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void Launch()
     {
+        _enemyAmount = _wave.EnemyCount;
+
         StartCoroutine(Create());
     }
 

@@ -6,9 +6,23 @@ public class BlocksDirectionChanger : MonoBehaviour
 {
     private List<Block> _blocks = new List<Block>();
 
+    private BlockGenerator _generator;
+
+    private void Awake()
+    {
+        _generator = GetComponent<BlockGenerator>();
+    }
+
     public void GetBlocks()
     {
         _blocks.Clear();
+
+        StartCoroutine(AddToList());
+    }
+
+    private IEnumerator AddToList()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -19,7 +33,11 @@ public class BlocksDirectionChanger : MonoBehaviour
     public void DestroyBlock(Block block)
     {
         _blocks.Remove(block);
-        Destroy(block, 0.5f);
+        Destroy(block);
+
+        if (_blocks.Count == 0)
+            _generator.GenerateGrid();
+
     }
 
     public void ChangeDirection()

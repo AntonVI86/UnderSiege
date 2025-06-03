@@ -64,6 +64,7 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
                 Vector3 rotate = transform.eulerAngles;
                 rotate.y = wall.Angle;
                 transform.rotation = Quaternion.Euler(rotate);
+                _layer = 0;
             }
 
             if(hit.transform.TryGetComponent(out ShellReceiver turret))
@@ -75,6 +76,7 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
                         int shellValue = Random.Range(_minShellValue, _maxShellValue);
 
                         turret.GetShells(_layerForReceived, _renderer.material, shellValue);
+
                         _moveDisposible.Clear();
                         _changer.DestroyBlock(this);
                         Destroy(gameObject);
@@ -86,12 +88,17 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
                     int shellValue = Random.Range(_minShellValue, _maxShellValue);
 
                     turret.GetShells(_layerForReceived, _renderer.material, shellValue);
-                    _renderer.material.name = _renderer.material.name;
+                    
                     _moveDisposible.Clear();
                     _changer.DestroyBlock(this);
                     Destroy(gameObject);
                 }
+            }
 
+            if(hit.transform.TryGetComponent(out BlockDestroyer destroyer))
+            {
+                _changer.DestroyBlock(this);
+                Destroy(gameObject);
             }
         }
     }
@@ -103,5 +110,10 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
         }
 
         return false;
+    }
+
+    private void OnDisable()
+    {
+        _moveDisposible.Clear();
     }
 }

@@ -64,12 +64,32 @@ public class TurretAttacker : ObjectPool
 
     private void FindEnemy(List<Enemy> enemies)
     {
+        List<Enemy> applicableEnemies = new List<Enemy>();
+
         foreach (var enemy in enemies)
         {
             if(CompareFirstCharacters(enemy.gameObject.name, _receiver.Render.material.name))
             {
-                _currentTarget = enemy;
+                applicableEnemies.Add(enemy);
             }
+        }
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+
+        if(applicableEnemies.Count > 0)
+        {
+            foreach (var applicableEnemy in applicableEnemies)
+            {
+                Vector3 diff = applicableEnemy.transform.position - position;
+                float currentDistance = diff.sqrMagnitude;
+
+                if(currentDistance < distance)
+                {
+                    _currentTarget = applicableEnemy;
+                    distance = currentDistance;
+                }
+            }
+
         }
     }
 
@@ -115,17 +135,17 @@ public class TurretAttacker : ObjectPool
     {
         Observable.EveryUpdate().Subscribe(_ => 
         {
-            if (_shellsAmount.Value <= 0 || _currentTarget == null)
-            {
-                transform.rotation = Quaternion.Euler(_defaultRotation);
-                _rotateDisposible.Clear();
-            }
+            //if (_shellsAmount.Value <= 0 || _currentTarget == null)
+            //{
+            //    transform.rotation = Quaternion.Euler(_defaultRotation);
+            //    _rotateDisposible.Clear();
+            //}
 
             if(_currentTarget != null)
             {
                 Quaternion currentRotation = transform.rotation;
                 Quaternion targetRotation = Quaternion.LookRotation(transform.position - _currentTarget.transform.position);
-                transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, Time.deltaTime * 200);
+                transform.localRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * 200);
             }
 
         }).AddTo(_rotateDisposible);       
