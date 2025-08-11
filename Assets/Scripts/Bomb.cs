@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class Bomb : Booster
 {
+    [SerializeField] private AudioClip _cancelSfx;
+    [SerializeField] private AudioClip _errorSfx;
     [SerializeField] private Image _icon;
     [SerializeField] private float _radius;
     [SerializeField] private LayerMask _layer;
+    [SerializeField] private ParticleSystem _explosionPrefab;
 
     private Button _button;
     private Slot _slot;
@@ -54,6 +57,7 @@ public class Bomb : Booster
                     if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, _layer))
                     {
                         Collider[] colliders = Physics.OverlapSphere(hitInfo.point, _radius);
+                        Instantiate(_explosionPrefab, new Vector3(hitInfo.point.x, hitInfo.point.y + 0.5f, hitInfo.point.z), Quaternion.Euler(-90,0,0));
 
                         foreach (var enemy in colliders)
                         {
@@ -63,6 +67,8 @@ public class Bomb : Booster
                             }
                         }
 
+                        SoundPlayer.Instance.PlaySound(UseSfx);
+
                         _isActivate = false;
                         _inventory.gameObject.SetActive(true);
                         _inventory.Save();
@@ -70,7 +76,7 @@ public class Bomb : Booster
                     }
                     else
                     {
-                        print("Не там");
+                        SoundPlayer.Instance.PlaySound(_errorSfx);
                     }
                 }
 
@@ -80,6 +86,8 @@ public class Bomb : Booster
                     _isActivate = false;
                     _slot.Cancel();
                     _inventory.gameObject.SetActive(true);
+
+                    SoundPlayer.Instance.PlaySound(_cancelSfx);
                 }
             }).AddTo(_disposible);           
         }

@@ -1421,7 +1421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d71501482f753458cf66b88c75b9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  _deathVfx: {fileID: 3732352573369468536, guid: 89a0eb5f489c65b4c8c173805c4c35e9,
+    type: 3}
+  _deathSfx: {fileID: 8300000, guid: 297ed6ade75ae604b9ade0b198673446, type: 3}
 --- !u!65 &-4209593212158756418
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1455,7 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a95581ceb813247ac348a9bec5bcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinPrefab: {fileID: 5814607813763882122, guid: 01e1752366bd8a54099885a72b28eff8,
+  _coinPrefab: {fileID: 7686027264354985850, guid: 01e1752366bd8a54099885a72b28eff8,
     type: 3}
 --- !u!54 &-5400687990190934428
 Rigidbody:

@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     private float _minXPosition = -6.5f;
     private float _maxXPosition = 9f;
-    private float _zStartPosition = -11.9f;
+    private float _zStartPosition = -10.9f;
     private float _yDefaultPosition = 2.53f;
 
     public int EnemyAmount => _enemyAmount;

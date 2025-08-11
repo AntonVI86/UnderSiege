@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 4354596169579809955}
   - component: {fileID: 4317971419253862484}
   - component: {fileID: 7109771912629009229}
+  - component: {fileID: -6091589268862224319}
   m_Layer: 5
   m_Name: Freeze
   m_TagString: Untagged
@@ -347,3 +348,16 @@ MonoBehaviour:
   _icon: {fileID: 6125258248647815079}
   _countVisual: {fileID: 4655204143552688622}
   _booster: {fileID: 11400000, guid: 41845e1e14728fa4e95b7a504eee0687, type: 2}
+--- !u!114 &-6091589268862224319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831935708953710539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bec13cf2a3c2394ebdd4cc72e898626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseSfx: {fileID: 8300000, guid: 50b2f3a37c4f84c26ba76e4b5e3efddb, type: 3}

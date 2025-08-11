@@ -15,6 +15,9 @@ public class WinPanel : Panel
 
     [SerializeField] private TMP_Text _currentMoney;
 
+    [SerializeField] private AudioClip _openSfx;
+    [SerializeField] private AudioClip _getClickSfx;
+
     private int _tempCoinsCount;
 
     private void OnEnable()
@@ -22,10 +25,16 @@ public class WinPanel : Panel
         _rewardButton.onClick.AddListener(OnClickShowRewardButton);
         _nextButton.onClick.AddListener(OnClickNextButton);
         _getButton.onClick.AddListener(OnClickGetButton);
+
+        SoundPlayer.Instance.StopPlayingMusic();
+        SoundPlayer.Instance.PlaySound(_openSfx);
+
+        _nextButton.enabled = false;
     }
 
     public void OnClickGetButton()
     {
+        _nextButton.enabled = true;
         _getButton.enabled = false;
         _rewardButton.gameObject.SetActive(true);
         _tempCoinsCount = Random.Range(10, 50);
@@ -33,6 +42,8 @@ public class WinPanel : Panel
         _goldSlot.gameObject.SetActive(true);
         _rewardButton.gameObject.SetActive(true);
         _currentMoney.text = _tempCoinsCount.ToString();
+
+        SoundPlayer.Instance.PlaySound(_getClickSfx);
     }
 
     public override void OnClickNextButton()
@@ -44,6 +55,11 @@ public class WinPanel : Panel
     }
 
     public override void OnClickShowRewardButton()
+    {
+        Agava.VKGames.VideoAd.Show(()=> { GetDoubleGoldValue(); });
+    }
+
+    public void GetDoubleGoldValue()
     {
         _tempCoinsCount *= 2;
         _currentMoney.text = _tempCoinsCount.ToString();

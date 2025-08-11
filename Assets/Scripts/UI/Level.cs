@@ -18,12 +18,20 @@ public class Level : MonoBehaviour
 
     private void OnWin()
     {
-        Time.timeScale = 0;
-        _winPanel.Show();
+        StartCoroutine(DelayToWinDisplay());
     }
 
     private void OnDefeated()
     {
+        int gameOverCount = 0;
+
+        if (PlayerPrefs.HasKey("GameOverCount"))
+            gameOverCount = PlayerPrefs.GetInt("GameOverCount");
+
+        gameOverCount++;
+        PlayerPrefs.SetInt("GameOverCount", gameOverCount);
+
+
         Time.timeScale = 0;
         _defeatPanel.Show();
     }
@@ -35,4 +43,11 @@ public class Level : MonoBehaviour
         _monstersCount.Win -= OnWin;
     }
 
+    private IEnumerator DelayToWinDisplay()
+    {
+        yield return new WaitForSeconds(2f);
+
+        Time.timeScale = 0;
+        _winPanel.Show();
+    }
 }

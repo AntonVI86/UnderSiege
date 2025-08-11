@@ -8,6 +8,8 @@ public class RewardDropper : MonoBehaviour
     private int _maxValue = 10;
     private int _minChanceValue = 8;
 
+    private float _spawnPositionY = 2.85f;
+
     public void Drop(Enemy enemy)
     {
         int currentValue = Random.Range(_minValue, _maxValue);
@@ -16,7 +18,11 @@ public class RewardDropper : MonoBehaviour
         {
             Coin coin = Instantiate(_coinPrefab);
             coin.transform.SetParent(null);
-            coin.transform.position = new Vector3(enemy.transform.position.x, 2.8f, enemy.transform.position.z);
+
+            Vector3 newPosition = new Vector3(enemy.transform.position.x, _spawnPositionY, enemy.transform.position.z);
+            coin.transform.position = newPosition;
+
+            coin.PlayDropOutSound();
         }
     }
 }

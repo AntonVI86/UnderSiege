@@ -9,11 +9,14 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
     [SerializeField] private LayerMask _layer;
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private int _layerForReceived;
+    [SerializeField] private ParticleSystem _collisionVfx;
+    [SerializeField] private AudioClip _collisionSfx;
 
     [SerializeField] private float _speed;
 
     [SerializeField] private int _minShellValue;
     [SerializeField] private int _maxShellValue;
+    [SerializeField] private float _distanceToStop;
 
     private Renderer _renderer;
 
@@ -35,17 +38,23 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
 
     public void Move()
     {
-        Observable.EveryUpdate().Subscribe(_ => 
+        Observable.EveryFixedUpdate().Subscribe(_ => 
         {
-            bool isHit = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 1.2f, _layer);
+            bool isHit = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), _distanceToStop, _layer);
 
-            if(isHit == false)
+            if (isHit == false)
             {
+
                 MovingToTarget();
             }
 
-            if(isHit)
+            if (isHit)
+            {
+                SoundPlayer.Instance.PlaySound(_collisionSfx);
+                _collisionVfx.Play();
                 _moveDisposible.Clear();
+            }
+
 
         }).AddTo(_moveDisposible);
     }
@@ -101,6 +110,11 @@ public class Block : MonoBehaviour, IPointerClickHandler, IMovable
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
     private bool CompareFirstCharacters(string first, string second)
     {

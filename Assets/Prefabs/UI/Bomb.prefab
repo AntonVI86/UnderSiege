@@ -270,7 +270,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb10bcb22bf87374493c894e7a15a478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseSfx: {fileID: 8300000, guid: 3c8be6d0d0ded814e9ca385e5fc241fd, type: 3}
+  _cancelSfx: {fileID: 8300000, guid: d3f7d2f8eda9d5c46bca9a0965e95685, type: 3}
+  _errorSfx: {fileID: 8300000, guid: 3202cb7689ab3984aac87415cfbd94b7, type: 3}
+  _icon: {fileID: 0}
   _radius: 2
+  _layer:
+    serializedVersion: 2
+    m_Bits: 0
+  _explosionPrefab: {fileID: 4379966092338217391, guid: 1b548d798b8dc8741942fe295a227f2c,
+    type: 3}
+  _isActivate: 0
 --- !u!114 &5091456056548747300
 MonoBehaviour:
   m_ObjectHideFlags: 0

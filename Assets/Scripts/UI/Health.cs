@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;
+    [SerializeField] private AudioClip _damageSfx;
+    [SerializeField] private Animator _damage;
 
     public event UnityAction Defeated;
     public event UnityAction<int> HealthValueChanged;
@@ -29,7 +31,9 @@ public class Health : MonoBehaviour
     public void ApplyDamage()
     {
         _currentHealth--;
+        _damage.Play("Damage");
         HealthValueChanged?.Invoke(_currentHealth);
+        SoundPlayer.Instance.PlaySound(_damageSfx);
 
         if(_currentHealth <= 0)
         {

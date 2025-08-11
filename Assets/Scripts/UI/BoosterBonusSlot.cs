@@ -32,11 +32,17 @@ public class BoosterBonusSlot : MonoBehaviour
         _wing.gameObject.SetActive(false);
     }
 
+    public void DisableButton()
+    {
+        _button.enabled = false;
+    }
+
     private void SetBonus()
     {
         _panel.Opt(_currentBooster);
         _wing.gameObject.SetActive(true);
     }
+
 
     private void OnDisable()
     {

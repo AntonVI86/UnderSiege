@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DefeatBoosterBonus : MonoBehaviour
@@ -13,12 +12,15 @@ public class DefeatBoosterBonus : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Button _button;
 
+    [SerializeField] private AudioClip _optSfx;
+    [SerializeField] private AudioClip _acceptSfx;
+
     private BoosterSO _currentBooster;
 
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(AcceptChoice);
+        _button.onClick.AddListener(OnclickAcceptButton);
     }
 
     private void Start()
@@ -43,6 +45,13 @@ public class DefeatBoosterBonus : MonoBehaviour
         _button.enabled = true;
         _currentBooster = booster;
         _info.text = Lean.Localization.LeanLocalization.GetTranslationText(booster.Description);
+
+        SoundPlayer.Instance.PlaySound(_optSfx);
+    }
+
+    private void OnclickAcceptButton()
+    {
+        Agava.VKGames.VideoAd.Show(() => { AcceptChoice(); });
     }
 
     private void AcceptChoice()
@@ -50,6 +59,13 @@ public class DefeatBoosterBonus : MonoBehaviour
         _inventory.AddBooster(_currentBooster);
         _button.GetComponentInChildren<TMP_Text>().text = "Получено";
         _button.enabled = false;
+
+        SoundPlayer.Instance.PlaySound(_acceptSfx);
+
+        foreach (var slot in _slots)
+        {
+            slot.DisableButton();
+        }
     }
 
     public void ShuffleArray()
@@ -66,6 +82,6 @@ public class DefeatBoosterBonus : MonoBehaviour
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(AcceptChoice);
+        _button.onClick.RemoveListener(OnclickAcceptButton);
     }
 }

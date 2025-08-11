@@ -12,6 +12,10 @@ public class TurretAttacker : ObjectPool
     [SerializeField] private float _delayToAttack;
     [SerializeField] private ShellReceiver _receiver;
 
+    [SerializeField] private AudioClip _attackSfx;
+    [SerializeField] private AudioClip _reloadSfx;
+    [SerializeField] private TowerAnimator _animator;
+
     public event UnityAction<int> ShellAmountChanged;
     private IntReactiveProperty _shellsAmount = new IntReactiveProperty();
 
@@ -45,6 +49,7 @@ public class TurretAttacker : ObjectPool
     {
         _shellsAmount.Value += value;
         ShellAmountChanged?.Invoke(_shellsAmount.Value);
+        SoundPlayer.Instance.PlaySound(_reloadSfx);
 
         if (_coroutine != null)
             StopCoroutine(_coroutine);
@@ -73,6 +78,7 @@ public class TurretAttacker : ObjectPool
                 applicableEnemies.Add(enemy);
             }
         }
+
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
 
@@ -89,7 +95,6 @@ public class TurretAttacker : ObjectPool
                     distance = currentDistance;
                 }
             }
-
         }
     }
 
@@ -111,8 +116,10 @@ public class TurretAttacker : ObjectPool
                     
                     _shellsAmount.Value--;
                     ShellAmountChanged?.Invoke(_shellsAmount.Value);
-                }
 
+                    SoundPlayer.Instance.PlaySound(_attackSfx);
+                    _animator.AttackEffect();
+                }
             }
 
             FindEnemy(_spawner.EnemiesOnField);
@@ -124,7 +131,6 @@ public class TurretAttacker : ObjectPool
     {
         bullet.gameObject.SetActive(true);
         bullet.gameObject.transform.position = spawnPoint;
-
 
         bullet.ChangeColor(_receiver.Layer, _receiver.Render.material);
         bullet.transform.rotation = transform.rotation;

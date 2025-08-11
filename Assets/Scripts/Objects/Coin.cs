@@ -1,14 +1,20 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Coin : MonoBehaviour, IPointerClickHandler
 {
-    public event UnityAction Picked;
+    [SerializeField] private AudioClip _pickUpSfx;
+    [SerializeField] private AudioClip _dropOutSfx;
+
+    public void PlayDropOutSound()
+    {
+        SoundPlayer.Instance.PlaySound(_dropOutSfx);
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         MoneyCounter.Instance.AddCoin(1);
+        SoundPlayer.Instance.PlaySound(_pickUpSfx);
         Destroy(gameObject);
     }
 }

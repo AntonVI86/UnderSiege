@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BlocksDirectionChanger : MonoBehaviour
 {
+    [SerializeField] private AudioClip _reversSfx;
+    [SerializeField] private AudioClip _errorSfx;
+
     private List<Block> _blocks = new List<Block>();
 
     private BlockGenerator _generator;
@@ -52,11 +55,12 @@ public class BlocksDirectionChanger : MonoBehaviour
             }
 
             MoneyCounter.Instance.AddCoin(-3);
+            SoundPlayer.Instance.PlaySound(_reversSfx);
         }
 
         else
         {
-            print("Недостаточно монет!");
+            SoundPlayer.Instance.PlaySound(_errorSfx);
         }
     }
 }

@@ -7,10 +7,14 @@ public class DefeatPanel : Panel
     [SerializeField] private Button _next;
     [SerializeField] private Button _showReward;
 
+    [SerializeField] private AudioClip _openSfx;
+
     private void OnEnable()
     {
         _next.onClick.AddListener(OnClickNextButton);
         _showReward.onClick.AddListener(OnClickShowRewardButton);
+        SoundPlayer.Instance.StopPlayingMusic();
+        SoundPlayer.Instance.PlaySound(_openSfx);
     }
 
     private void OnDisable()

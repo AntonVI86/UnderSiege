@@ -8,6 +8,8 @@ public class Wave : MonoBehaviour
 
     [SerializeField] private TMP_Text _levelVisual;
 
+    [SerializeField] private AudioClip _newLevelSfx;
+
     private int _enemyCount;
     private int _level = 1;
 
@@ -18,6 +20,11 @@ public class Wave : MonoBehaviour
     {
         Load();
         _levelVisual.text = "Волна " + _level.ToString();
+    }
+
+    private void Start()
+    {
+        SoundPlayer.Instance.PlaySound(_newLevelSfx);
     }
 
     public void NextLevel()
