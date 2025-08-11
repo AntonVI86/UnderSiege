@@ -14,12 +14,7 @@ public class VkInitializer : MonoBehaviour
     }
     private IEnumerator Start()
     {
-#if UNITY_EDITOR
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        yield break;
-#else
         yield return Agava.VKGames.VKGamesSdk.Initialize(onSuccessCallback: () => _alertWindow.SetActive(true));
-#endif
     }
     private void OnClickButton()
     {
